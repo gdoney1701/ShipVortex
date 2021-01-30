@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     {
         try
         {
-            cycloneConfig.drawDebug();
+            //cycloneConfig.drawDebug();
         }
         catch (System.Exception e) {
         }
