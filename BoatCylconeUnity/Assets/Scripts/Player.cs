@@ -23,6 +23,12 @@ public class Player : MonoBehaviour
     Rigidbody rb;
     GameObject ph_Pointer;
     float ph_pointerRadius;
+
+    Vector3 vectorToMouse;
+
+    //Delegates
+    public delegate void OnFireDelegate();
+    public static OnFireDelegate fireDelegate;
     private void Awake()
     {
 
@@ -37,17 +43,19 @@ public class Player : MonoBehaviour
 
         ph_Pointer = transform.Find("ph_pointer").gameObject;
         ph_pointerRadius = (transform.position - ph_Pointer.transform.position).magnitude;
+
+        fireDelegate += fireFeedback;
     }
 
     // Update is called once per frame
     void Update()
     {
         updateMovementFromKeys();
+
+        if (Input.GetButtonDown("Fire1")) {
+            fireDelegate();
+        }
     }
-
-   
-
-
 
     private void updateMovementFromKeys() {
         //implement Brackeys whatever soon
@@ -56,7 +64,6 @@ public class Player : MonoBehaviour
         float yInput = Input.GetAxis("Vertical");
         updateReticlePosition();
         rb.position += new Vector3(xInput, 0, yInput) * Time.deltaTime * playerConfig.speed;
-
     }
 
     private void updateReticlePosition() {
@@ -64,33 +71,28 @@ public class Player : MonoBehaviour
         //cast a ray from the mouse at the angle of the camera and stop it at the plane of the character
 
         //ok lots of math
-        Debug.Log(Input.mousePosition);
-        Plane plane = new Plane(Vector3.up, -rb.position.y);
+        Plane playerPlane = new Plane(Vector3.up, -rb.position.y);
 
         float distance;
         Vector3 mouseWorldPosition = Vector3.zero;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (plane.Raycast(ray, out distance))
+        if (playerPlane.Raycast(ray, out distance))
         {
             mouseWorldPosition = ray.GetPoint(distance);
             
             
         }
 
-        Vector3 vectorToMouse = mouseWorldPosition - rb.position;
+        vectorToMouse = mouseWorldPosition - rb.position;
+        vectorToMouse = vectorToMouse.normalized;
+        Vector3 finalPosition = transform.position + (vectorToMouse.normalized * ph_pointerRadius);
 
-        Debug.DrawLine(rb.position, mouseWorldPosition, Color.red);
-        ph_Pointer.transform.position = transform.position + (vectorToMouse.normalized * ph_pointerRadius);
-        /*
-        var mouseStart = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
-        
-        //RaycastHit hit = Physics.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-        RaycastHit hit;
-        if (Physics.Raycast(mouseStart, Camera.main.transform.forward, out hit, Mathf.Infinity))
-        {
-            Debug.DrawRay(mouseStart, Camera.main.transform.forward * hit.distance, Color.yellow);
-        }
+        ph_Pointer.transform.position = Vector3.Lerp(ph_Pointer.transform.position, finalPosition, 0.1f);
+    
+    }
 
-        */
+    void fireFeedback() {
+        Debug.Log("fire");
+
     }
 }
