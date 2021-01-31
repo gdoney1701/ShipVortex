@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FlagMat
+  m_Name: Flag_MAT
   m_Shader: {fileID: -6465566751694194690, guid: 109083b1ad6d32c4c90103515f576eee, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
