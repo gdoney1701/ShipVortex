@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: e9cd866fc617fff4da167381fb59771a
+  - enabled: 1
     path: Assets/Scenes/GreyBoxScene.unity
     guid: 93fa7758e2e084a4082c149ef03cf679
   m_configObjects:

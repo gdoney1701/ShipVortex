@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 2369969708745456755}
   - {fileID: 2369969709686854085}
-  - {fileID: 5074254067968669315}
+  - {fileID: 5399368553778777549}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -52,7 +52,7 @@ MonoBehaviour:
   impactClip: {fileID: 8300000, guid: a34e83490ae87db4ea37df8889310bc9, type: 3}
   travelingClip: {fileID: 0}
   assocTeam: 0
-  visuals: {fileID: 5557599841156738105}
+  visuals: {fileID: 4730391197134509943}
 --- !u!54 &2369969708380749372
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -315,7 +315,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 8
+  m_Radius: 10.52
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2369969708294185018
 PrefabInstance:
@@ -380,19 +380,47 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7641970795809975799, guid: a06142c7fc5da2f4bbb50f8c4778dbd0, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7641970795809975799, guid: a06142c7fc5da2f4bbb50f8c4778dbd0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7641970795809975799, guid: a06142c7fc5da2f4bbb50f8c4778dbd0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7641970795809975799, guid: a06142c7fc5da2f4bbb50f8c4778dbd0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7641970795809975799, guid: a06142c7fc5da2f4bbb50f8c4778dbd0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7641970795809975799, guid: a06142c7fc5da2f4bbb50f8c4778dbd0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7641970795809975799, guid: a06142c7fc5da2f4bbb50f8c4778dbd0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7909268143533820931, guid: a06142c7fc5da2f4bbb50f8c4778dbd0, type: 3}
       propertyPath: m_Name
       value: RedShip_Fab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a06142c7fc5da2f4bbb50f8c4778dbd0, type: 3}
---- !u!1 &5557599841156738105 stripped
+--- !u!1 &4730391197134509943 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 7909268143533820931, guid: a06142c7fc5da2f4bbb50f8c4778dbd0, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7009407928878364493, guid: a06142c7fc5da2f4bbb50f8c4778dbd0, type: 3}
   m_PrefabInstance: {fileID: 2369969708294185018}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &5074254067968669315 stripped
+--- !u!4 &5399368553778777549 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 7388311131079956153, guid: a06142c7fc5da2f4bbb50f8c4778dbd0, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7641970795809975799, guid: a06142c7fc5da2f4bbb50f8c4778dbd0, type: 3}
   m_PrefabInstance: {fileID: 2369969708294185018}
   m_PrefabAsset: {fileID: 0}

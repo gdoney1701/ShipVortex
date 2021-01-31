@@ -152,7 +152,7 @@ public class Ship : MonoBehaviour
             highestGust = Mathf.Max(highestGust, wind.amount);
             Vector3 windVector = wind.updateWind();
 
-            rb.position += windVector* 0.05f;
+            rb.position += windVector* 0.15f;
 
         }
         //highest gust high if there is a lot of wind effecting it

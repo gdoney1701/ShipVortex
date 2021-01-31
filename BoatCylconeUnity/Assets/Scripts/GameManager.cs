@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using DG.Tweening;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -156,7 +158,8 @@ public class GameManager : MonoBehaviour
         }
         public void tutorialCameraAnim() {
             Sequence tutSeq = DOTween.Sequence();
-
+            tutSeq.AppendInterval(3f);
+            GM.tutorialText.SetText("Welcome to Cyclone Sentry!");
             lerpToPlaceAndLookAtFlag(tutSeq, TeamEnum.Red, "in this game, you play as a god, guiding ships lost at sea");
             lerpToPlaceAndLookAtFlag(tutSeq, TeamEnum.Green, "beware the cyclone in the middle of the map!");
             lerpToPlaceAndLookAtFlag(tutSeq, TeamEnum.Blue, "blow the ships towards the port that has the same color as their flag");
@@ -197,6 +200,10 @@ public class GameManager : MonoBehaviour
             s.Append(GM.endScore.DOColor(Color.white, 1f));
             s.Append(GM.numShots.DOColor(Color.white, 1f));
             s.Append(GM.finalMessage.DOColor(Color.white, 1f));
+            s.AppendInterval(3f);
+            s.AppendCallback(() => {
+                SceneManager.LoadScene(0);
+            });
         }
 
 
@@ -227,6 +234,7 @@ public class GameManager : MonoBehaviour
         numShots.color = Color.clear;
         finalMessage.color = Color.clear;
         cameraManager.tutorialCameraAnim();
+        //levelManager.loadLevel(1);
     
     }
 
