@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
     [Header("UI and such")]
     public TMP_Text scoreText;
+    public TMP_Text tutorialText;
+    public Image blackPanel;
+    public TMP_Text gameEndText;
+    public TMP_Text endScore;
+    public TMP_Text numShots;
+    public TMP_Text finalMessage;
+    public GameObject gameOverParent;
 
     public delegate void OnScoreChange();
     public static OnScoreChange scoreDelegate;
@@ -91,6 +99,8 @@ public class GameManager : MonoBehaviour
 
             onGameOver += () => {
                 Debug.Log("Game over");
+                GM.gameOver = true;
+                GM.cameraManager.gameOverCameraMove();
             };
         }
 
@@ -119,18 +129,105 @@ public class GameManager : MonoBehaviour
 
     public LevelManager levelManager;
     public GameObject levelParent;
+    public CameraManager cameraManager;
+    public class CameraManager {
+        Camera cam;
+        Vector3 rootPos;
+        Quaternion rootRot;
+        GameManager GM;
+        Vector3 vertOffset = new Vector3(0, 3, 0);
+        bool finalCamFired = false;
+        public CameraManager(Camera _cam, GameManager _GM) {
+            cam = _cam;
+            rootPos = cam.transform.position;
+            rootRot = cam.transform.rotation;
+            GM = _GM;
+        }
 
+        public void lerpToPlaceAndLookAtFlag(Sequence s, TeamEnum team, string tutorialMessage) {
+            Vector3 toFlagVector;
+            s.AppendCallback(() => {
+                GM.tutorialText.SetText(tutorialMessage);
+            });
+            s.Append(cam.transform.DOMove(GM.endzoneDictionary[team].transform.position + vertOffset, 2).SetEase(Ease.InOutSine));
+            toFlagVector = GM.endzoneDictionary[team].flag.transform.position - (GM.endzoneDictionary[team].transform.position + vertOffset);
+            s.Append(cam.transform.DORotateQuaternion(Quaternion.LookRotation(toFlagVector), 2).SetEase(Ease.InOutSine));
+
+        }
+        public void tutorialCameraAnim() {
+            Sequence tutSeq = DOTween.Sequence();
+
+            lerpToPlaceAndLookAtFlag(tutSeq, TeamEnum.Red, "in this game, you play as a god, guiding ships lost at sea");
+            lerpToPlaceAndLookAtFlag(tutSeq, TeamEnum.Green, "beware the cyclone in the middle of the map!");
+            lerpToPlaceAndLookAtFlag(tutSeq, TeamEnum.Blue, "blow the ships towards the port that has the same color as their flag");
+            lerpToPlaceAndLookAtFlag(tutSeq, TeamEnum.Yellow, "use WASD to move, and click to shoot:)");
+            tutSeq.AppendCallback(() => {
+
+                cam.transform.DORotateQuaternion(rootRot, 2).SetEase(Ease.InOutSine);
+            });
+            tutSeq.Append(cam.transform.DOMove(rootPos, 2).SetEase(Ease.InOutSine));
+            tutSeq.AppendCallback(() => {
+
+                GM.tutorialText.SetText("try moving around and shooting! a ship will spawn shortly...");
+            });
+            tutSeq.AppendInterval(5f);
+            tutSeq.onComplete += () =>
+            {
+                GM.tutorialText.SetText("");
+                GM.levelManager.loadLevel(1);
+            };
+
+        }
+
+        public void gameOverCameraMove() {
+            if (finalCamFired) {
+                return;
+            }
+            finalCamFired = true;
+            Sequence s = DOTween.Sequence();
+            
+            s.AppendInterval(0.5f);
+            s.Append(GM.blackPanel.DOFade(1f, 1f));
+            cam.transform.DOMove(GM.cycloneParent.transform.position, 2f).SetEase(Ease.InOutSine);
+            cam.transform.DORotateQuaternion(Quaternion.LookRotation(-Vector3.up), 2f).SetEase(Ease.InOutSine);
+            GM.numShots.SetText("You fired wind " + GM.numberTimesFired.ToString() + " times");
+            GM.endScore.SetText("Score: " + GM.score);
+            s.AppendInterval(0.5f);
+            s.Append(GM.gameEndText.DOColor(Color.white, 1f));
+            s.Append(GM.endScore.DOColor(Color.white, 1f));
+            s.Append(GM.numShots.DOColor(Color.white, 1f));
+            s.Append(GM.finalMessage.DOColor(Color.white, 1f));
+        }
+
+
+
+    }
+
+    Dictionary<TeamEnum, EndZone> endzoneDictionary = new Dictionary<TeamEnum, EndZone>();
+    public int numberTimesFired = 0;
+    public bool gameOver = false;
     void Start()
     {
         cycloneConfig = new CycloneConfig(cycloneParent);
         levelManager = new LevelManager(levelParent, this);
-        cycloneConfig.speed = 5;
+        cameraManager = new CameraManager(Camera.main, this);
+        cycloneConfig.speed = 10;
         cycloneConfig.maxPull = 4;
-        cycloneConfig.innerRadius = 1;
-        cycloneConfig.outerRadius = 10;
+        cycloneConfig.innerRadius = 10;
+        cycloneConfig.outerRadius = 30;
         scoreDelegate += scaleScore;
-        Debug.Log(speedFalloff.Evaluate(0.5f));
-        levelManager.loadLevel(1);
+        //levelManager.loadLevel(1);
+        
+        foreach (EndZone e in FindObjectsOfType<EndZone>()) {
+            endzoneDictionary.Add(e.assocTeam, e);
+        }
+        blackPanel.color = Color.clear;
+        gameEndText.color = Color.clear;
+        endScore.color = Color.clear;
+        numShots.color = Color.clear;
+        finalMessage.color = Color.clear;
+        cameraManager.tutorialCameraAnim();
+    
     }
 
     // Update is called once per frame
@@ -182,7 +279,7 @@ public class GameManager : MonoBehaviour
         if (distance < cycloneConfig.innerRadius)
         {
             
-            return 0;
+            return -1;
         }
 
         else if (distance > cycloneConfig.outerRadius) {

@@ -20,6 +20,7 @@ public class EndZone : MonoBehaviour
     
 
     public TeamEnum assocTeam;
+    public GameObject flag;
     // Update is called once per frame
     void Update()
     {

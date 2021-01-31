@@ -21,9 +21,9 @@ public class Projectile : MonoBehaviour
     {
         
         projectileConfig = new ProjectileConfig();
-        projectileConfig.speed = 10f;
-        projectileConfig.lifetime = 2f;
-        projectileConfig.maxScale = 1f;
+        projectileConfig.speed = 40f;
+        projectileConfig.lifetime = 4f;
+        projectileConfig.maxScale = 5f;
     }
 
     // Update is called once per frame

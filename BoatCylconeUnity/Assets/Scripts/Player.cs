@@ -36,13 +36,14 @@ public class Player : MonoBehaviour
     {
 
     }
+    public GameManager GM;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+        GM = FindObjectOfType<GameManager>();
         playerConfig = new PlayerConfig(gameObject);
         tweenData = new TweenData();
-        playerConfig.speed = 5;
+        playerConfig.speed = 20;
 
         ph_Pointer = transform.Find("ph_pointer").gameObject;
         body = transform.Find("body").gameObject;
@@ -53,6 +54,12 @@ public class Player : MonoBehaviour
         fireDelegate += () =>
         {
             windSource.Play();
+        };
+        fireDelegate += () =>
+        {
+            if (!GM.gameOver) {
+                GM.numberTimesFired++;
+            }
         };
     }
 

@@ -15,7 +15,7 @@ public class Ship : MonoBehaviour
     public AudioClip impactClip;
     public AudioClip travelingClip;
 
-    
+
     private float cycloneWeight = 1;
     private AudioSource soundSource;
 
@@ -27,10 +27,23 @@ public class Ship : MonoBehaviour
         public bool ignoreCyclone = false;
     }
     public IgnoreState ignoreState;
+
+    public class LookHelper {
+
+        public Vector3 positionLastFrame;
+        public Vector3 currentPosition;
+
+        public Vector3 getForwardVector() {
+
+            return (positionLastFrame - currentPosition).normalized;
+        }
+    }
+
+    private LookHelper lookHelper;
     public class WindInteraction {
-        
+
         public float amount = 0;
-        public float windTime = 0.4f;
+        public float windTime = 1f;
 
         public Vector3 windDirection;
         public float lifeTime;
@@ -43,42 +56,52 @@ public class Ship : MonoBehaviour
 
 
         public Vector3 updateWind() {
-            amount += Time.deltaTime * (1f/ windTime);
+            amount += Time.deltaTime * (1f / windTime);
             return windDirection * fallOff.Evaluate(amount);
         }
     }
-    
+
     private HashSet<WindInteraction> gustsAffecting = new HashSet<WindInteraction>();
     private HashSet<Projectile> projectilesHit = new HashSet<Projectile>();
 
     public delegate void OnDockDelegate();
     public static OnDockDelegate onDock;
+    public delegate void OnSinkDelegate();
+    public static OnSinkDelegate onSink;
+
+    public GameObject visuals;
 
     private void Awake()
     {
         ignoreState = new IgnoreState();
+        lookHelper = new LookHelper();
     }
     void Start()
     {
-        
-        
+
+
         GM = FindObjectOfType<GameManager>();
         rb = GetComponent<Rigidbody>();
         soundSource = GetComponent<AudioSource>();
+
         soundSource.clip = impactClip;
 
         assocTeam = TeamEnum.Blue;
-
         
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        
+        lookHelper.positionLastFrame = rb.position;
         updateVelocityForCyclone(true);
         updateAllGusts();
+        updateLookDirection();
+
+        lookHelper.positionLastFrame = rb.position;
 
     }
     public void dockShip(EndZone port) {
@@ -95,17 +118,23 @@ public class Ship : MonoBehaviour
         }
         if (other.GetComponent<Projectile>()) {
             WindInteraction newWind = new WindInteraction(other.GetComponent<Projectile>(), 1, GM.windFalloff);
-            
-            if (projectilesHit.Contains(other.GetComponent<Projectile>())){
+
+            if (projectilesHit.Contains(other.GetComponent<Projectile>())) {
 
                 return;
             }
             soundSource.Play();
-            
+
             projectilesHit.Add(other.GetComponent<Projectile>());
             gustsAffecting.Add(newWind);
         }
-        
+
+    }
+
+    private void updateLookDirection() {
+
+
+        visuals.transform.rotation = Quaternion.Euler(0,-90,0)* Quaternion.LookRotation(lookHelper.getForwardVector());
     }
     private void updateAllGusts() {
 
@@ -121,9 +150,9 @@ public class Ship : MonoBehaviour
                 continue;
             }
             highestGust = Mathf.Max(highestGust, wind.amount);
-            Vector3 windVector = wind.updateWind() / 10;
+            Vector3 windVector = wind.updateWind();
 
-            rb.position += windVector;
+            rb.position += windVector* 0.05f;
 
         }
         //highest gust high if there is a lot of wind effecting it
@@ -176,6 +205,7 @@ public class Ship : MonoBehaviour
             return;
         }
 
+        
         Vector3 vectorToCenterOfCyclone = GM.getVectorToCyclone(rb.position);
 
         var startRad = vectorToCenterOfCyclone.magnitude;
@@ -196,8 +226,22 @@ public class Ship : MonoBehaviour
         }
 
         vectorToCenterOfCyclone.Scale(new Vector3(1, 0, 1));
+        if (GM.calculatePull(vectorToCenterOfCyclone.magnitude) < 0) {
+            destroyShipTween(GM.cycloneParent.transform.position);
+            return;
+        }
         rb.position += vectorToCenterOfCyclone.normalized * GM.calculatePull(vectorToCenterOfCyclone.magnitude) * Time.deltaTime * cycloneWeight;
 
+    }
+
+    public void destroyShipTween(Vector3 centerPoint) {
+        ignoreState.ignoreCyclone = true;
+        ignoreState.ignoreWind = true;
+        transform.DOScale(Vector3.zero, 0.5f);
+        rb.DOMove(centerPoint, 0.5f).onComplete += () => {
+            Destroy(gameObject);
+            GM.levelManager.checkForEndOfLevel();
+        };
     }
 
     public TeamEnum GetTeam() {
