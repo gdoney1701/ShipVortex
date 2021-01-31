@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     float ph_pointerRadius;
 
     Vector3 vectorToMouse;
-    
+    public AudioSource windSource;
 
     //Delegates
     public delegate void OnFireDelegate();
@@ -50,6 +50,10 @@ public class Player : MonoBehaviour
 
         fireDelegate += fireFeedback;
         fireDelegate += fireProjectile;
+        fireDelegate += () =>
+        {
+            windSource.Play();
+        };
     }
 
     // Update is called once per frame

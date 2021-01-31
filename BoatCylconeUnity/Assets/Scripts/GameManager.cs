@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
 
 
     }
-
+    public AudioSource shipSpawnSound;
     public class LevelManager {
         int currentLevel = 1;
        public bool levelIsLoading = false;
@@ -56,12 +56,14 @@ public class GameManager : MonoBehaviour
 
         public delegate void onGameOverDelegate();
         public static onGameOverDelegate onGameOver;
-
-        public LevelManager(GameObject _levelParent) {
+        private GameManager GM;
+        public LevelManager(GameObject _levelParent, GameManager _GM) {
             levelParent = _levelParent;
+            GM = _GM;
         }
 
         public void loadLevel(int level) {
+            GM.shipSpawnSound.Play();
             levelIsLoading = true;
             totalLevels = levelParent.transform.childCount;
             currentLevelGO = levelParent.transform.GetChild(level - 1).gameObject;
@@ -117,10 +119,11 @@ public class GameManager : MonoBehaviour
 
     public LevelManager levelManager;
     public GameObject levelParent;
+
     void Start()
     {
         cycloneConfig = new CycloneConfig(cycloneParent);
-        levelManager = new LevelManager(levelParent);
+        levelManager = new LevelManager(levelParent, this);
         cycloneConfig.speed = 5;
         cycloneConfig.maxPull = 4;
         cycloneConfig.innerRadius = 1;
