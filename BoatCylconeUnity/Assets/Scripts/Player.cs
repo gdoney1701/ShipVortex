@@ -1,30 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 
 public class Player : MonoBehaviour
 {
     // Start is called before the first frame update
 
     class PlayerConfig {
-
         public PlayerConfig(GameObject _parent) {
 
         }
-        
         public float speed;
+    }
 
-
+    class TweenData {
+        public bool positionTweening = false;
     }
 
     PlayerConfig playerConfig;
-
+    TweenData tweenData;
     Rigidbody rb;
     GameObject ph_Pointer;
+    GameObject body;
+    public GameObject projectilePrefab;
     float ph_pointerRadius;
 
     Vector3 vectorToMouse;
+    
 
     //Delegates
     public delegate void OnFireDelegate();
@@ -38,13 +41,15 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         playerConfig = new PlayerConfig(gameObject);
-
+        tweenData = new TweenData();
         playerConfig.speed = 5;
 
         ph_Pointer = transform.Find("ph_pointer").gameObject;
+        body = transform.Find("body").gameObject;
         ph_pointerRadius = (transform.position - ph_Pointer.transform.position).magnitude;
 
         fireDelegate += fireFeedback;
+        fireDelegate += fireProjectile;
     }
 
     // Update is called once per frame
@@ -90,9 +95,32 @@ public class Player : MonoBehaviour
         ph_Pointer.transform.position = Vector3.Lerp(ph_Pointer.transform.position, finalPosition, 0.1f);
     
     }
+    void fireProjectile() {
+        Projectile newProjectile = Instantiate(projectilePrefab).GetComponent<Projectile>();
+        newProjectile.gameObject.transform.position = ph_Pointer.transform.position;
+        
+        
+        
+        newProjectile.initialize(ph_Pointer.transform.position, vectorToMouse);
+
+
+    }
 
     void fireFeedback() {
-        Debug.Log("fire");
+        if (tweenData.positionTweening) {
+            return;
+        }
+        tweenData.positionTweening = true;
+        
 
+        Vector3 startPos = body.transform.localPosition;
+        Sequence feedBackTween = DOTween.Sequence();
+        feedBackTween.Append(body.transform.DOLocalMove(startPos - vectorToMouse * 0.3f, 0.2f).SetEase(Ease.OutCubic));
+        feedBackTween.Append(body.transform.DOLocalMove(startPos, 0.2f).SetEase(Ease.InCubic));
+
+        feedBackTween.onComplete += () =>
+        {
+            tweenData.positionTweening = false;
+        };
     }
 }
