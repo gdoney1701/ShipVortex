@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: VortexHighlights_MAT
+  m_Shader: {fileID: -6465566751694194690, guid: 9d4bb895de153d94ebc493b61bdb3f62, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_000a054dc07547ed88240a7218d339f8: 3.58
+    - Vector1_30d1f5a79b70452bb0ea45e138efed50: 2
+    - Vector1_8acc329257fc45ee9cd1caa593c6eab5: 5.77
+    - Vector1_983e05cccd674646becb7c9b9b2e1605: 0.43
+    - Vector1_a885a2c942f4430898997fc34483bbb6: 4.38
+    - Vector1_a954dcd733904f5eab72a8d8014d8a74: 1
+    - Vector1_cd7b6035c29a4c718664fa908829d907: 15.04
+    - Vector1_f7970c4bed134ac58d431c1c4b6c870e: 5
+    m_Colors:
+    - Color_1adf5f14b08f4ac2a9bd2d5345cdf5ac: {r: 0.2028302, g: 0.49604216, b: 1, a: 0}
+    - Color_4352256658bf4bbfb7e413b68183b518: {r: 1, g: 1, b: 1, a: 0}
+    - Color_b753816575d140a784c331ae8f494d8e: {r: 4.114313, g: 4.375408, b: 4.383087, a: 0}
+    - Vector2_a86c1876322c4eaa82039c7116ac59cf: {r: 0, g: 0.2, b: 0, a: 0}
+  m_BuildTextureStacks: []
