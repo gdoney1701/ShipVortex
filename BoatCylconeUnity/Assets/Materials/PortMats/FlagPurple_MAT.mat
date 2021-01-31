@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PortRadiusBlue_MAT 1
-  m_Shader: {fileID: -6465566751694194690, guid: a340b135b94c10b43a8f9b1da4eacbb7, type: 3}
+  m_Name: FlagPurple_MAT
+  m_Shader: {fileID: -6465566751694194690, guid: 109083b1ad6d32c4c90103515f576eee, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,6 +19,14 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_9dc707f8925f458a8e5afa6f4dff9ca8:
+        m_Texture: {fileID: 2800000, guid: d86097f4fb0112940a5d9b9f24bc2c52, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2DLOD_ef87c5cc5f4a4d4b85766bbecaf03dc1_Texture_1:
+        m_Texture: {fileID: 2800000, guid: c4e1d61ffeb3f8846b23dfde67b4f10f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -32,14 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_437b4105a956407ca37a2fb37788364a: 7.7
-    - Vector1_6afc6ac85c5848ea99f8791a28e006a3: 1.7
-    - Vector1_96472afd896d4060aa9ef60f915c294a: 22.72
-    - Vector1_a09ff7f55f5a4269881ffa7ea1b33a87: 0.86
-    - Vector1_b20d2e42f2694a2791eb31206ec78201: 4.4
-    - Vector1_df6a4139090441559aea2b1365e6b9ad: 19.04
-    - Vector1_ebffbb5db7834152a6af31728cc277e0: 0
-    m_Colors:
-    - Color_792f6ef9b1374f1da963b1e842cbc753: {r: 0.88641816, g: 0, b: 3.577002, a: 0}
-    - Color_a64f998a5ed94cd0844c1343bcbf4b4f: {r: 4, g: 4, b: 4, a: 0}
+    - Vector1_0d7097126a194fd7a16e03046fa000c5: 2.6
+    - Vector1_e785f3643ab44fdfa939c7d3bd39413a: 3.31
+    m_Colors: []
   m_BuildTextureStacks: []

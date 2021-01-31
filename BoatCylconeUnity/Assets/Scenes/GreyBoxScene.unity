@@ -269,6 +269,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5061857354010089833, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061857354010089833, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061857354010089834, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
+      propertyPath: m_Intensity
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5403824361568724719, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
       propertyPath: m_Name
       value: RedPort_Fab
@@ -905,6 +917,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1161618490}
     m_Modifications:
+    - target: {fileID: 1029745855767505603, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7dc8e52d3f9bc63419e8e4d70542628b, type: 2}
     - target: {fileID: 4734951222557523029, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -949,6 +965,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5061857354010089833, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061857354010089833, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -15.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061857354010089834, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
+      propertyPath: m_Intensity
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5061857354196937063, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -957,6 +985,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedPort_Fab
       objectReference: {fileID: 0}
+    - target: {fileID: 7192652076835981299, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99a369cd2a2c94644b58ca75cf57c087, type: 2}
     m_RemovedComponents:
     - {fileID: 5061857354196937062, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
@@ -1014,6 +1046,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 6479229767345801606, guid: 31e9b60754c5d1e4b8fec9369c400ec9, type: 3}
   windSource: {fileID: 1132941777}
+  GM: {fileID: 0}
 --- !u!54 &734103591
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1152,6 +1185,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   levelParent: {fileID: 1850268674}
+  numberTimesFired: 0
+  gameOver: 0
 --- !u!1001 &788135750
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1159,6 +1194,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 853094561}
     m_Modifications:
+    - target: {fileID: 1029745855767505603, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cb3c377248bfda049b60b5e06d28caef, type: 2}
     - target: {fileID: 4734951222557523029, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1203,6 +1242,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5061857354010089833, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -17.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061857354010089833, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -19.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061857354010089834, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
+      propertyPath: m_Intensity
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5061857354196937063, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1211,6 +1262,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedPort_Fab
       objectReference: {fileID: 0}
+    - target: {fileID: 7192652076835981299, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e251966077f375241ab8f4751467b899, type: 2}
     m_RemovedComponents:
     - {fileID: 5061857354196937062, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
@@ -1729,6 +1784,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1975027808}
     m_Modifications:
+    - target: {fileID: 1029745855767505603, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cc529e927cf6ebc40a2af6d14460f550, type: 2}
     - target: {fileID: 4734951222557523029, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1773,6 +1832,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5061857354010089833, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061857354010089833, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -19.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 5061857354010089834, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
+      propertyPath: m_Intensity
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5061857354196937063, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1781,6 +1852,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedPort_Fab
       objectReference: {fileID: 0}
+    - target: {fileID: 7192652076835981299, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8ec9770f9e963424e959f83bd1ca6899, type: 2}
     m_RemovedComponents:
     - {fileID: 5061857354196937062, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: cd66fbdbd02815f44a154fa801d44fb7, type: 3}
@@ -3333,7 +3408,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1991790934}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.49, z: 0}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2027958928}
